@@ -1,9 +1,10 @@
-/**
- * @format
- */
+import { AppRegistry } from "react-native";
+import { name as appName } from "./app.json";
+import { App } from "./src/Root/App";
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+if (__DEV__) {
+  const { RNModulePaths } = require("react-native-module-paths");
+  RNModulePaths.registerAssets();
+}
 
 AppRegistry.registerComponent(appName, () => App);
