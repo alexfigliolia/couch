@@ -1,21 +1,14 @@
 export class Dates {
+  public static TODAY = new Date();
   public static readonly formatter = new Intl.DateTimeFormat("en-us", {
     dateStyle: "medium",
   });
-  public static readonly months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  public static readonly months = Array.from({ length: 12 }, (_, i) => {
+    const today = new Date();
+    today.setDate(1);
+    today.setMonth(i);
+    return today.toLocaleString("default", { month: "long" });
+  });
 
   public static days = [
     "Sunday",
@@ -27,12 +20,12 @@ export class Dates {
     "Saturday",
   ];
 
-  public static month(index: number) {
-    return this.months[index];
+  public static month(date: Date) {
+    return date.toLocaleString("default", { month: "long" });
   }
 
-  public static day(index: number) {
-    return this.days[index];
+  public static day(date: Date) {
+    return date.toLocaleString("default", { weekday: "long" });
   }
 
   public static format(date: Date) {

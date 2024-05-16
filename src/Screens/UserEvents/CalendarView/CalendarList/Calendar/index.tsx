@@ -10,7 +10,10 @@ import { Styles } from "./Styles";
 
 export const Calendar = memo(
   function Calendar({ month, year, events, cacheHeight }: Props) {
-    const monthName = useMemo(() => Dates.month(month), [month]);
+    const monthName = useMemo(
+      () => Dates.month(new Date(year, month, 1)),
+      [month, year],
+    );
     const rows = useMemo(() => {
       return Controller.createGrid(year, month);
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,10 +42,10 @@ export const Calendar = memo(
           </View>
           <View style={Styles.grid}>
             <View style={[Styles.row, Styles.dayNames]}>
-              {Dates.days.map(day => {
+              {rows[0].map(({ date, day }) => {
                 return (
                   <View key={day} style={Styles.day}>
-                    <Text style={Styles.dayName}>{day[0]}</Text>
+                    <Text style={Styles.dayName}>{Dates.day(date)[0]}</Text>
                   </View>
                 );
               })}

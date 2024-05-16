@@ -6,7 +6,6 @@ import { UtilityStyles } from "Styles/Utility";
 import { CardStyles } from "../CardStyles";
 import { CloseButton } from "../CloseButton";
 import { TextContent } from "./TextContent";
-/* eslint-disable react-native/no-inline-styles */
 
 export const Front = memo(function Front({
   name,

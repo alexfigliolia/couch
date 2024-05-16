@@ -1,12 +1,13 @@
 import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 import { Screen } from "Dimensions/Screen";
 import type { ICalendar } from "Models/Schedule";
+import { Dates } from "Tools/Dates";
 
 export class Controller {
-  private heightCache = new Array<number>(12).fill(0);
+  public static DIMENSIONS = Screen.WIDTH * 0.9;
   public static lastScrollIndex: number | null = null;
+  private heightCache = new Array<number>(Dates.months.length).fill(0);
   public currentIndex = Controller.lastScrollIndex ?? new Date().getMonth();
-  private lastScrollPosition = this.currentIndex * Screen.WIDTH;
 
   public getHeight(index: number) {
     return this.heightCache[index];
@@ -24,7 +25,7 @@ export class Controller {
     _: ArrayLike<ICalendar> | null | undefined,
     index: number,
   ) => {
-    return { length: Screen.WIDTH, offset: index * Screen.WIDTH, index };
+    return { length: this.DIMENSIONS, offset: index * this.DIMENSIONS, index };
   };
 
   public computeNext(e: NativeSyntheticEvent<NativeScrollEvent>) {
@@ -33,13 +34,10 @@ export class Controller {
     if (position < 0) {
       return -1;
     }
-    let nextPosition: number;
-    if (position > this.lastScrollPosition) {
-      nextPosition = Math.ceil(position / Screen.WIDTH);
-    } else {
-      nextPosition = Math.floor(position / Screen.WIDTH);
-    }
-    this.lastScrollPosition = position;
+    const nextPosition = Math.min(
+      11,
+      Math.ceil(position / Controller.DIMENSIONS),
+    );
     Controller.lastScrollIndex = nextPosition;
     return nextPosition;
   }

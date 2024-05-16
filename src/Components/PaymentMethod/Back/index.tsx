@@ -6,7 +6,6 @@ import { PaymentMethods } from "State/PaymentMethods";
 import { CardStyles } from "../CardStyles";
 import { CloseButton } from "../CloseButton";
 import { Styles } from "./Styles";
-/* eslint-disable react-native/no-inline-styles */
 
 export const Back = memo(function Back({
   name,

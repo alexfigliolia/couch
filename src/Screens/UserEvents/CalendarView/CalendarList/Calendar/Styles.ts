@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
 import { Screen } from "Dimensions/Screen";
 import { UtilityStyles } from "Styles/Utility";
+import { Controller } from "../Controller";
 
 export const Styles = StyleSheet.create({
   container: {
-    width: Screen.WIDTH,
+    width: Controller.DIMENSIONS,
   },
   inner: {
     width: "100%",
@@ -48,6 +49,7 @@ export const Styles = StyleSheet.create({
     width: "100%",
     marginBottom: Screen.P / 2,
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   day: {

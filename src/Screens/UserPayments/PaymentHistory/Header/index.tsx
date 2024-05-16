@@ -13,7 +13,7 @@ export const Header = memo(function Header({ date }: Props) {
       <View style={Styles.selectors}>
         <DateSelector
           onPress={Transactions.openMonths}
-          text={Dates.month(date.getMonth())}
+          text={Dates.month(date)}
         />
         <DateSelector
           onPress={Transactions.openYears}

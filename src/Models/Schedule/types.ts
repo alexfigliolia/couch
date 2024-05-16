@@ -2,6 +2,7 @@ export interface ISchedule {
   schedules: ICalendar[];
   activeEvents: IEvent[];
   activeDate: Date;
+  datePicker: boolean;
 }
 
 export interface ICalendar {

@@ -4,7 +4,6 @@ import { useSchedule } from "State/Schedule";
 import { Dates } from "Tools/Dates";
 import type { Propless } from "Types/React";
 import { DateButton } from "./DateButton";
-import { DropDown } from "./Dropdown";
 import { Styles } from "./Styles";
 
 export const DateSelector = memo(
@@ -15,10 +14,8 @@ export const DateSelector = memo(
     const dates = useSchedule(state =>
       Object.keys(state.schedules[month].events),
     );
-
     return (
       <View style={Styles.container}>
-        <DropDown />
         {dates.length > 1 && (
           <ScrollView
             horizontal

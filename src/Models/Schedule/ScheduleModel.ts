@@ -7,9 +7,28 @@ export class ScheduleModel extends State<ISchedule> {
     super("Schedule", {
       activeEvents: [],
       activeDate: new Date(),
+      datePicker: false,
       schedules: ScheduleModel.createSchedules(),
     });
     this.setEvents(new Date().getMonth());
+  }
+
+  public togglePicker() {
+    this.update(state => {
+      state.datePicker = !state.datePicker;
+    });
+  }
+
+  public selectMonth(year: number, month: number) {
+    const { schedules } = this.getState();
+    const { events } = schedules?.[month] || {};
+    for (const key in events) {
+      return this.activateDate(new Date(year, month, parseInt(key)));
+    }
+    return this.update(state => {
+      state.activeDate = new Date(year, month, 1);
+      state.activeEvents = [];
+    });
   }
 
   public activateDate(date: Date) {
@@ -73,6 +92,11 @@ export class ScheduleModel extends State<ISchedule> {
       }
     }
     return [scopedEvents, date];
+  }
+
+  public activeYearAndMonth(): [Date, number, number] {
+    const { activeDate } = this.getState();
+    return [activeDate, activeDate.getFullYear(), activeDate.getMonth()];
   }
 
   private static createSchedules() {

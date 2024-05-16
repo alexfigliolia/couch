@@ -13,8 +13,8 @@ import { Calendar } from "./Calendar";
 import { Controller } from "./Controller";
 import { Styles } from "./Styles";
 
-export const ListView = memo(
-  function ListView(_: Propless) {
+export const CalendarList = memo(
+  function CalendarList(_: Propless) {
     const controller = useController(new Controller());
     const schedules = useSchedule(state => state.schedules);
     const [height, setHeight] = useState<number | undefined>();
@@ -22,7 +22,12 @@ export const ListView = memo(
     const onScroll = useCallback(
       (e: NativeSyntheticEvent<NativeScrollEvent>) => {
         const nextPosition = controller.computeNext(e);
-        if (nextPosition >= 0 && controller.currentIndex !== nextPosition) {
+        const nextHeight = controller.getHeight(nextPosition);
+        if (
+          nextHeight !== 0 &&
+          nextPosition >= 0 &&
+          controller.currentIndex !== nextPosition
+        ) {
           controller.currentIndex = nextPosition;
           LayoutAnimation.configureNext(
             LayoutAnimation.create(300, "easeOut", "opacity"),
@@ -56,11 +61,11 @@ export const ListView = memo(
         pagingEnabled
         windowSize={3}
         data={schedules}
+        onScroll={onScroll}
         initialNumToRender={3}
         maxToRenderPerBatch={3}
         renderItem={renderItem}
         scrollEventThrottle={100}
-        onScroll={onScroll}
         showsHorizontalScrollIndicator={false}
         style={[Styles.container, { height }]}
         keyExtractor={Controller.keyExtractor}

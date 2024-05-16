@@ -2,9 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const Styles = StyleSheet.create({
   container: {
-    width: "90%",
-    alignSelf: "center",
-    marginTop: 30,
+    width: "100%",
+    zIndex: 3,
   },
   scrollView: {
     zIndex: 1,

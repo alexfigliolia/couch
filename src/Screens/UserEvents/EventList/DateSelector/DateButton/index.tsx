@@ -10,7 +10,7 @@ import { Styles } from "./Styles";
 export const DateButton = memo(
   function Date({ active, date }: Props) {
     const day = useMemo(() => date.getDate(), [date]);
-    const dayOfWeek = useMemo(() => Dates.day(date.getDay()), [date]);
+    const dayOfWeek = useMemo(() => Dates.day(date), [date]);
 
     const activateDate = useCallback(() => {
       Schedule.activateDate(date);

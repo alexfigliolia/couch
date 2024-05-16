@@ -20,20 +20,24 @@ export class Controller {
           row.push({
             fade: true,
             day,
+            date: new Date(year, month - 1, day),
             events: Schedule.hasEvents(month - 1, day),
           });
         }
       }
       for (let j = 0; j < 7 - current; j++) {
         if (++monthDay > currentMaxDay) {
+          const day = ++nextMonthDay;
           row.push({
+            day,
             fade: true,
-            day: ++nextMonthDay,
+            date: new Date(year, month + 1, day),
             events: Schedule.hasEvents(month + 1, nextMonthDay),
           });
         } else {
           row.push({
             day: monthDay,
+            date: new Date(year, month, monthDay),
             events: Schedule.hasEvents(month, monthDay),
           });
         }
